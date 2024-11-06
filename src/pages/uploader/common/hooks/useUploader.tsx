@@ -10,7 +10,7 @@ const UseUploader=() => {
     const [uploadFileResponse,setUploadFileResponse] = useState<StatusResponse | null>(null);
 
     const uploadFile=async(data:UploaderFormInterface): Promise<void> => {
-        const uploadPath: string = import.meta.env.VITE_BACKEND_UPLOAD_ENDPOINT;
+        const uploadPath: string = import.meta.env.VITE_BACKEND_UPLOAD_ENDPOINT_VM;
         const formData= new FormData();
         // @ts-ignore
         formData.append("file",data.file[0]);
@@ -31,7 +31,7 @@ const UseUploader=() => {
     }
 
     const uploadUrl=async(data:UploaderFormInterface): Promise<void> => {
-        const uploadPath: string = import.meta.env.VITE_BACKEND_UPLOAD_ENDPOINT;
+        const uploadPath: string = import.meta.env.VITE_BACKEND_UPLOAD_ENDPOINT_VM;
         const formData= new FormData();
         // @ts-ignore
         formData.append("url",data.url);
