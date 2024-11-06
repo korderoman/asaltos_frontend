@@ -1,0 +1,18 @@
+runtime: nodejs18
+service: default
+handlers:
+  #Cada vez que se llame a la raíz debe atender el index.html
+  - url: /
+    static_files: dist/index.html
+    upload: dist/index.html
+  #Para cualquier ruta debe
+  - url: /(.*\.js)$
+    static_files: dist/\1
+    upload: dist/(.*\.js)$
+    mime_type: text/javascript
+  - url: /(.css)
+    static_files: dist/assets\1
+    upload: dist/assets/(.css)
+  - url: /(.*)
+    static_files: dist/\1
+    upload: dist/(.*)
