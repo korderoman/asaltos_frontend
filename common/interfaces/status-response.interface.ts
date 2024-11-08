@@ -6,4 +6,5 @@ export interface StatusResponse {
 
 export interface Extras {
     url:string
+    has_violence?:boolean
 }

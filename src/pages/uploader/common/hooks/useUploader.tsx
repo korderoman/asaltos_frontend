@@ -2,12 +2,14 @@ import {UploaderFormInterface} from "../interfaces";
 import {useState} from "react";
 import axios, {AxiosResponse} from "axios";
 import {StatusResponse} from "../../../../../common/interfaces";
-export interface UploaderInterface {
-    formData:UploaderFormInterface
+export interface UploaderProps {
+    setOpenSnackbar: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const UseUploader=() => {
+const UseUploader=(props:UploaderProps) => {
     const [isLoadingUpload, setIsLoadingUpload] = useState<boolean>(false);
     const [uploadFileResponse,setUploadFileResponse] = useState<StatusResponse | null>(null);
+
+
 
     const uploadFile=async(data:UploaderFormInterface): Promise<void> => {
         const uploadPath: string = import.meta.env.VITE_BACKEND_UPLOAD_ENDPOINT_VM;
@@ -41,6 +43,7 @@ const UseUploader=() => {
                     'Content-Type': 'application/json',
                 }})
             console.log("response",response)
+            props.setOpenSnackbar(true)
             setUploadFileResponse(response.data)
         }catch(e){
             console.error(e);

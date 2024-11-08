@@ -1,9 +1,10 @@
-import {JSX,} from "react";
+import {JSX, useState,} from "react";
 import {useForm} from "react-hook-form";
 import {UploaderFormInterface} from "./common/interfaces";
 import UseUploader from "./common/hooks/useUploader.tsx";
 import {AiOutlineLoading3Quarters} from "react-icons/ai";
-import VideoPlayer from "../../components/video-player/VideoPlayer.tsx";
+import {SnackbarCloseReason} from "@mui/material/Snackbar";
+import UploaderNotification from "./common/UploaderNotification.tsx";
 
 const Uploader=():JSX.Element=>{
     const {
@@ -13,11 +14,22 @@ const Uploader=():JSX.Element=>{
         reset,
         watch
     } = useForm<UploaderFormInterface>({defaultValues:{file:null, url:null}});
-    const {isLoadingUpload, uploadFile, uploadFileResponse, uploadUrl} = UseUploader();
+    const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
+    const {isLoadingUpload, uploadFile, uploadFileResponse, uploadUrl} = UseUploader({setOpenSnackbar});
    /* const requiredFile:RegisterOptions<UploaderFormInterface,'file'>={required:"Debe subir un archivo"}
     const requiredUrl:RegisterOptions<UploaderFormInterface,'url'>={required:"Debe agregar una url"}*/
     const videoValue: File| null=watch('file');
     const urlValue: string | null=watch('url');
+
+    const onHandleSnackBarClose = (
+        _: React.SyntheticEvent | Event,
+        reason?: SnackbarCloseReason,
+    ): void => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setOpenSnackbar(false);
+    };
     const onSubmitVideo=async (): Promise<void>=>{
         const data:UploaderFormInterface = getValues()
         console.log(data)
@@ -87,9 +99,12 @@ const Uploader=():JSX.Element=>{
                     </div>
                 </form>
             </section>
-            <section className={"container mt-5 d-flex justify-content-center align-items-center"}>
-                {uploadFileResponse && <VideoPlayer url={uploadFileResponse.extras.url}/>}
-            </section>
+            <UploaderNotification
+                message={""}
+                onHandleSnackBarClose={onHandleSnackBarClose}
+               openSnackbar={openSnackbar}
+                uploadFileResponse={uploadFileResponse}
+            />
         </>
 
     )
