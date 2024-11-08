@@ -1,11 +1,12 @@
 import React, { JSX } from "react";
 import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
-import Alert from '@mui/material/Alert';
+import Alert, {AlertColor, AlertPropsColorOverrides} from '@mui/material/Alert';
+import {OverridableStringUnion} from "@mui/types";
 
 export interface NotificationProps {
     message: string;
     openSnackbar: boolean;
-    severity:string ;
+    severity:OverridableStringUnion<AlertColor, AlertPropsColorOverrides> | undefined ;
     onHandleSnackBarClose: (
         event: React.SyntheticEvent | Event,
         reason?: SnackbarCloseReason,

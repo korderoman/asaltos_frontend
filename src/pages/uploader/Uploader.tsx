@@ -100,9 +100,8 @@ const Uploader=():JSX.Element=>{
                 </form>
             </section>
             <UploaderNotification
-                message={""}
                 onHandleSnackBarClose={onHandleSnackBarClose}
-               openSnackbar={openSnackbar}
+                openSnackbar={openSnackbar}
                 uploadFileResponse={uploadFileResponse}
             />
         </>

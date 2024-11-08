@@ -3,6 +3,8 @@ import Notification from "../../../components/notification/Notification.tsx";
 import VideoPlayer from "../../../components/video-player/VideoPlayer.tsx";
 import {StatusResponse} from "../../../../common/interfaces";
 import {SnackbarCloseReason} from "@mui/material/Snackbar";
+import {OverridableStringUnion} from "@mui/types";
+import {AlertColor, AlertPropsColorOverrides} from "@mui/material/Alert";
 
 export interface UploaderNotificationProps {
     openSnackbar: boolean;
@@ -17,7 +19,7 @@ const UploaderNotification=({openSnackbar,uploadFileResponse, onHandleSnackBarCl
         return "El vídeo no tienen violencia"
     }
 
-    const solveSeverity=(uploadFileResponse: StatusResponse | null): string=>{
+    const solveSeverity=(uploadFileResponse: StatusResponse | null): OverridableStringUnion<AlertColor, AlertPropsColorOverrides> | undefined =>{
         if(uploadFileResponse?.extras.has_violence){
             return "error"
         }
