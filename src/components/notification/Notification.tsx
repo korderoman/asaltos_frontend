@@ -19,7 +19,7 @@ const Notification = (props: NotificationProps): JSX.Element => {
             <Snackbar
                 anchorOrigin={{vertical: 'top', horizontal: 'center'}}
                 open={props.openSnackbar}
-                autoHideDuration={3000}
+                autoHideDuration={null}
                 onClose={props.onHandleSnackBarClose}
             >
                 <Alert
