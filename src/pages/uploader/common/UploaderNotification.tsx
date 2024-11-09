@@ -44,10 +44,24 @@ const UploaderNotification=({openSnackbar,uploadFileResponse, onHandleSnackBarCl
                         severity={solveSeverity(uploadFileResponse)}
                     />
                 </section>
-                <section className={"container mt-5 d-flex justify-content-center align-items-center"}>
-                    <VideoPlayer url={solveUrlWithoutProcess(uploadFileResponse)}/>
-                    <VideoPlayer url={uploadFileResponse.extras.url}/>
-                </section>
+                <div className={"container"}>
+                    <section className={"row mt-5 "}>
+                        <div className="col-12 col-md-6">
+                            <div className={"d-flex flex-column align-items-center"}>
+                                <p className={"fw-bold"}>Vídeo original</p>
+                                <VideoPlayer url={solveUrlWithoutProcess(uploadFileResponse)}/>
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <div className={"d-flex flex-column align-items-center"}>
+                                <p className={"fw-bold"}>Vídeo procesado</p>
+
+                                <VideoPlayer url={uploadFileResponse.extras.url}/>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
             </div>}
         </>
     )
