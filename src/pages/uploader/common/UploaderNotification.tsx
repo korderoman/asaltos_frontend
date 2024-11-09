@@ -14,9 +14,16 @@ export interface UploaderNotificationProps {
 const UploaderNotification=({openSnackbar,uploadFileResponse, onHandleSnackBarClose}: UploaderNotificationProps): JSX.Element=>{
     const solveMessage=(uploadFileResponse: StatusResponse | null): string=>{
         if(uploadFileResponse?.extras.has_violence){
-            return "El vídeo tiene violencia"
+            return "Violencia detectada"
         }
-        return "El vídeo no tienen violencia"
+        return "Sin violencia"
+    }
+    const solveUrlWithoutProcess=(uploadFileResponse: StatusResponse): string=>{
+        const rawUrl:string = uploadFileResponse.extras.url;
+        const step1: Array<string> = rawUrl.split("_learned");
+        const step2: string = step1[0].concat("",step1[1]);
+        return step2
+
     }
 
     const solveSeverity=(uploadFileResponse: StatusResponse | null): OverridableStringUnion<AlertColor, AlertPropsColorOverrides> | undefined =>{
@@ -38,6 +45,7 @@ const UploaderNotification=({openSnackbar,uploadFileResponse, onHandleSnackBarCl
                     />
                 </section>
                 <section className={"container mt-5 d-flex justify-content-center align-items-center"}>
+                    <VideoPlayer url={solveUrlWithoutProcess(uploadFileResponse)}/>
                     <VideoPlayer url={uploadFileResponse.extras.url}/>
                 </section>
             </div>}

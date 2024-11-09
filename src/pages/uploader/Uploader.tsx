@@ -64,7 +64,7 @@ const Uploader=():JSX.Element=>{
                                 name={"submitVideo"}
                                 className={"btn btn-primary"}
                                 disabled={!videoValue || isLoadingUpload}
-                            >Subir video {isLoadingUpload && (
+                            >Analizar vídeo {isLoadingUpload && (
                                 <span className={"ms-2 loading-spinner"}>
                                     <AiOutlineLoading3Quarters className={"loading-spinner"}/>
                                     </span>
@@ -89,7 +89,7 @@ const Uploader=():JSX.Element=>{
                                 name={"submitUrl"}
                                 className={"btn btn-primary"}
                                 disabled={!urlValue || isLoadingUpload}
-                            >Subir video {isLoadingUpload && (
+                            >Analizar vídeo {isLoadingUpload && (
                                 <span className={"ms-2 loading-spinner"}>
                                     <AiOutlineLoading3Quarters className={"loading-spinner"}/>
                                     </span>
