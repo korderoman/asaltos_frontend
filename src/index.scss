@@ -7,6 +7,11 @@ body{
 .loading-spinner{
   animation: loading-spinner 1s linear infinite;
 }
+/* Establecer un alto fijo para ambos videos */
+.video-fixed-height {
+  height: 300px; /* Puedes ajustar este valor según tus necesidades */
+  object-fit: cover; /* Recorta el video para llenar el contenedor */
+}
 
 @keyframes loading-spinner {
   from {transform: rotate(0deg)}
